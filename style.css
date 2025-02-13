@@ -1,0 +1,152 @@
+
+body{
+  background-color: #DAD3BE;
+}
+#cityName{
+    font-size: 100px;
+    color: white;
+}
+*{
+    margin: 0;
+}
+.card{
+    width: 12%;
+    height: 95%;
+    background-color: #c1bfa6b1;
+font-size: 20px;
+box-shadow: 0px 10px 15px rgba(141, 137, 137, 0.509);
+border-radius: 30px;
+}
+.bodyy{
+ height: 80%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-size: 20px;
+}
+.header{
+    color: #DAD3BE;
+   background-color: #254336;
+}
+.time{
+    /* background: linear-gradient(45deg,#254336,#254336ba); */
+    color: #254336;
+}
+.header h1{
+    font-weight: 200;
+    text-align: center;
+    padding: 5px;
+    font-size: 30px;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#center{
+    height: 200px;justify-content: space-around; margin-top: 80px;
+}
+.header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+.cityy{
+    width: 250px; height: 35px; font-size: 25px; text-align: center; color: #254336; background: none; border-radius: 10px; outline: none; margin-left: 40px; border: 1px solid #254336;
+}
+
+.quran{
+    font-size: 30px;
+    margin-top: 20px; 
+    font-weight: 200;
+}
+.timer{
+    margin-top: 40px; font-size: 70px; font-weight: 400;
+}
+#cityName{
+    font-weight: 200; color: #254336; font-size: 60px;
+}
+#date{
+    font-size: 30px; font-weight: 200;
+}
+
+/* responsive: */
+@media(max-width:700px){
+    body{
+        height: 100vh;
+
+    }
+    .bodyy{
+        height: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+       }
+    .time{
+        /* font-size: 20px; */
+    }
+   
+   
+ 
+    .quran{
+        font-size: 25px;
+    }
+    .timer{
+        margin-top: 40px; font-size: 50px; font-weight: 400;
+    }
+    .cityy{
+        width: 150px;
+    }
+    #cityName{
+        font-size: 40px;
+    }
+    #date{
+        font-size: 18px; font-weight: 200;
+    }
+    .center{
+        display: grid;
+        width: 100%;
+        
+        grid-template-columns: repeat(3,1fr);
+        row-gap: 40px;
+    }
+
+    .card{
+        width: 60%;
+        height: 130px;
+        margin-right: 30px;
+    }
+}
+
+@media(max-width:450px){
+    .quran{
+        font-size: 15px;
+    }
+    .time{
+        font-size: 20px;
+    }
+    .header h1{
+     
+        font-size: 20px;
+    }
+    .timer{
+        font-size: 40px;
+    }
+    .cityy{
+        width: 100px;
+        font-size: 23px;
+    }
+    #cityName{
+        font-size: 30px;
+    }
+    #date{
+        font-size: 15px;
+    }
+    .center{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body dir="rtl">
+    <div class="main" style="height: 100vh;">
+        <div style="color: #254336;text-align: center; ">
+            <h2 class="timer" style="">مواقيت الصلاة</h2>
+            <h6 class="quran" style="">رَبِّ اجْعَلْنِي مُقِيمَ الصَّلاَةِ وَمِن ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاء</h6>
+        </div>
+        <div >
+            <div class="header-content">
+
+                <div style="color: #254336; margin-right: 40px;">
+    <h1 id="cityName" style="">الرياض</h1>
+    <h6 id="date" style="">الجمعة 23 نوفمبر</h6>
+                </div>
+                <div >
+                    <!-- changecity: -->
+                
+                    <select class="cityy"  style="" name="" id="cityselect">
+                
+                    </select>
+                </div>            
+            </div>
+<hr style="margin: 20px 50px; color: #254336;">
+
+<!-- prayertimes: -->
+<div class="center" id="center" style="">
+    <div class="card">
+        <div class="header">
+            <h1>الفجر</h1>
+        </div>
+        <div class="body bodyy" style="">
+            <h1 id="fjr" class="time">4:20</h1>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="header">
+            <h1>الشروق</h1>
+        </div>
+        <div class="body bodyy" style="height: 80%;">
+            <h1 id="sunrise" class="time">4:20</h1>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="header">
+            <h1>الظهر</h1>
+        </div>
+        <div class="body bodyy" style="height: 80%;">
+            <h1 id="duhur" class="time">4:20</h1>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="header">
+            <h1>العصر</h1>
+        </div>
+        <div class="body bodyy" style="height: 80%;">
+            <h1 id="asr" class="time">4:20</h1>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="header">
+            <h1>المغرب</h1>
+        </div>
+        <div class="body bodyy" style="height: 80%;">
+            <h1 id="mqrp" class="time">4:20</h1>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="header">
+            <h1>العشاء</h1>
+        </div>
+        <div class="body bodyy" style="height: 80%;">
+            <h1 id="isha" class="time">4:20</h1>
+        </div>
+    </div>
+    
+    
+
+
+
+</div>
+
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="./node_modules/axios/dist/axios.min.js"></script>
+<script>
+let cityes=[
+    "الرياض","جدة","الشرقية","القصيم","مكة المكرمة","المدينة المنورة","حائل","تبوك","نجران","الباحة","جازان","الجوف"
+]
+for(let city of cityes){
+const content=`
+<option>${city}</option>
+`
+document.getElementById("cityselect").innerHTML+=content
+}
+
+document.getElementById("cityselect").addEventListener("change",function(){
+if(this.value=="القصيم"){
+getprayerstimingofcity("Al Qaşīm")
+document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="جدة"){
+    getprayerstimingofcity("Makkah al Mukarramah")
+    document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="مكة المكرمة"){
+getprayerstimingofcity("Makkah al Mukarramah")
+document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="تبوك"){
+    getprayerstimingofcity("Tabūk")
+    document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="حائل"){
+getprayerstimingofcity("Ḩā'il")
+document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="نجران"){
+getprayerstimingofcity("Najrān")
+document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="الجوف"){
+getprayerstimingofcity("Al Jawf")
+document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="جازان"){
+getprayerstimingofcity("Jāzān")
+document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="الباحة"){
+getprayerstimingofcity("Al Bāḩah")
+document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="الشرقية"){
+getprayerstimingofcity("Ash Sharqīyah")
+document.getElementById("cityName").innerHTML=this.value
+}else if(this.value=="المدينة المنورة"){
+getprayerstimingofcity("Al Madīnah al Munawwarah")
+document.getElementById("cityName").innerHTML=this.value
+}
+})
+function getprayerstimingofcity(cityName){
+
+    let params={
+        country:"SA",
+        city:cityName
+    
+    }
+axios.get('https://api.aladhan.com/v1/timingsByCity',{
+    params:params
+})
+.then((response)=>{
+    const timings=response.data.data.timings;
+    filltimeforprayer("fjr",timings.Fajr)
+    filltimeforprayer("sunrise",timings.Sunrise)
+    filltimeforprayer("duhur",timings.Dhuhr)
+    filltimeforprayer("asr",timings.Asr)
+    filltimeforprayer("mqrp",timings.Maghrib)
+    filltimeforprayer("isha",timings.Isha)
+    const readable=response.data.data.date.readable
+    const weekday=response.data.data.date.hijri.weekday.ar
+    // date:
+const date= weekday + " "+readable ;
+document.getElementById("date").innerHTML=date
+ 
+}).catch((error)=>{
+    console.log(error)
+})
+}
+getprayerstimingofcity("Ar Riyāḑ")
+function filltimeforprayer(id,time){
+    document.getElementById(id).innerHTML=time
+}
+</script>
+</html>
